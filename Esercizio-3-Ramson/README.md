@@ -62,37 +62,45 @@ Per dare vita al mio restyle (progetto **Nova**), ho ripensato l'intera esperien
 Ho organizzato la struttura di consegna per renderla pulita e perfettamente rispondente al brief:
 
 ```text
-RF_SITO WEB ARTICOLI/
-├── 01-originale-html/          # Fase 1: Ricreazione fedele del layout originale
-│   ├── index.html              # HTML5 semantico del vecchio sito
-│   ├── style.css               # Stile float originale (Pacifico font, float)
-│   ├── default.css             # Stile Nivo Slider
-│   ├── nivo-slider.css         # Stile Nivo Slider
-│   ├── style1.css              # Stile Nivo Slider
-│   └── assets/                 # Immagini originali e librerie JS originali
-│       ├── jquery-1.7.1.min.js
-│       ├── jquery.nivo.slider.js
-│       ├── times-square.jpg
-│       ├── times-square-horse.jpg
-│       ├── times-square-people.jpg
-│       └── times-square-traffic.jpg
+RF_SITO-ARTICOLI/               # Root della repository GitHub
+├── .gitignore                  # File per escludere file non necessari dal tracking Git
+├── CONTRIBUTI/                 # Documentazione e materiale originale fornito per il progetto
+│   ├── consegna.docx           # Brief e specifiche di consegna
+│   ├── img-1-svgrepo-com.svg   # Risorsa grafica di supporto
+│   ├── screen.png              # Screenshot del layout originale da ricreare
+│   └── spiegazione del layout-2.pdf # Dettagli sull'impaginazione originaria
 │
-├── 02-figma/                   # Fase 2: Progettazione UI/UX
-│   ├── README.md               # Link figma e istruzioni
-│   ├── Mockup_pagina_articoli.png     # Anteprima grafica del mockup definitivo
-│   └── Wireframe_pagina_articoli.png  # Anteprima grafica del wireframe
-│   # Nota: Ricordati di esportare qui il file .fig
-│
-├── 03-sito-moderno/            # Fase 3: Sviluppo Front-End Moderno (Nova)
-│   ├── index.html              # Codice HTML5 moderno, semantico ed accessibile
-│   ├── style.css               # Foglio di stile CSS Grid + Flexbox responsive
-│   └── assets/                 # Immagini moderne del layout
-│       ├── times-square.jpg
-│       ├── times-square-horse.jpg
-│       ├── times-square-people.jpg
-│       └── times-square-traffic.jpg
-│
-└── README.md                   # Questa documentazione tecnica unificata
+└── Esercizio-3-Ramson/         # Cartella principale dello studente
+    ├── README.md               # Questa documentazione tecnica unificata
+    │
+    ├── 01-originale-html/      # Fase 1: Ricreazione fedele del layout originale
+    │   ├── index.html          # HTML5 semantico del vecchio sito
+    │   ├── style.css           # Stile float originale (Pacifico font, float)
+    │   ├── default.css         # Stile Nivo Slider
+    │   ├── nivo-slider.css     # Stile Nivo Slider
+    │   ├── style1.css          # Stile Nivo Slider
+    │   └── assets/             # Immagini originali e librerie JS originali
+    │       ├── jquery-1.7.1.min.js
+    │       ├── jquery.nivo.slider.js
+    │       ├── times-square.jpg
+    │       ├── times-square-horse.jpg
+    │       ├── times-square-people.jpg
+    │       └── times-square-traffic.jpg
+    │
+    ├── 02-figma/               # Fase 2: Progettazione UI/UX
+    │   ├── README.md           # Link figma e istruzioni
+    │   ├── Articoli wireframe_mockup.fig # File Figma esportato
+    │   ├── Mockup_pagina_articoli.png    # Anteprima grafica del mockup definitivo
+    │   └── Wireframe_pagina_articoli.png # Anteprima grafica del wireframe
+    │
+    └── 03-sito-moderno/        # Fase 3: Sviluppo Front-End Moderno (Nova)
+        ├── index.html          # Codice HTML5 moderno, semantico ed accessibile
+        ├── style.css           # Foglio di stile CSS Grid + Flexbox responsive
+        └── assets/             # Immagini moderne del layout
+            ├── times-square.jpg
+            ├── times-square-horse.jpg
+            ├── times-square-people.jpg
+            └── times-square-traffic.jpg
 ```
 
 ---
@@ -111,5 +119,5 @@ RF_SITO WEB ARTICOLI/
 
 Per visualizzare localmente una delle due versioni del sito, procedi così:
 1. Apri la cartella del progetto nel tuo editor (ad esempio VS Code).
-2. Seleziona il file `index.html` all'interno di `01-originale-html/` (se vuoi esplorare la versione classica) o di `03-sito-moderno/` (se vuoi testare la mia versione moderna e responsive).
+2. Seleziona il file `index.html` all'interno di `Esercizio-3-Ramson/01-originale-html/` (se vuoi esplorare la versione classica) o di `Esercizio-3-Ramson/03-sito-moderno/` (se vuoi testare la mia versione moderna e responsive).
 3. Fai click destro sul file ed esegui con **Live Server** (oppure fai semplicemente doppio click sul file per aprirlo direttamente nel tuo browser preferito).
