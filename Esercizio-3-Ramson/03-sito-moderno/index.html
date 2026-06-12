@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+      =============================================================================
+      PROGETTO NOVA — SITO WEB ARTICOLI MODERNO (ESERCIZIO 3)
+      =============================================================================
+      Questo file rappresenta la versione modernizzata e riprogettata del vecchio sito.
+      
+      MIGLIORAMENTI APPORTATI:
+      1. Struttura Semantica: Sostituzione di div anonimi con tag HTML5 semantici 
+         (<header>, <main>, <section>, <article>, <footer>).
+      2. Accessibilità (A11y):
+         - Menu Hamburger mobile migliorato con tag <button> e attributi ARIA:
+           * aria-label="Apri menu principale"
+           * aria-expanded="false"/"true" per indicare lo stato aperto/chiuso
+           * aria-controls="nav" per associare il pulsante al menu di navigazione
+         - Alt text descrittivi per tutte le immagini di layout.
+      3. Ottimizzazione Asset e Performance:
+         - Rimozione completa di jQuery e Nivo Slider (non necessari nel layout moderno).
+         - Organizzazione semplificata: index.html e style.css nella root di cartella,
+           con immagini collocate in assets/ (eliminazione di cartelle nidificate html/css/js).
+      4. Design Responsive & Interattività:
+         - Layout responsive mobile-first basato su CSS Grid e Flexbox.
+         - Script JavaScript nativo per menu mobile e smooth scrolling nativo.
+      =============================================================================
+    -->
+    <title>Sito Articoli Moderno — Progetto Nova</title>
+    
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Modernized Styles -->
+    <link rel="stylesheet" href="style.css" type="text/css">
+    
+    <!-- Smooth Scrolling & Mobile Menu Script -->
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Mobile menu toggle
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            const headerNav = document.querySelector('.header-nav');
+            const navLinks = document.querySelectorAll('.header-nav a');
+            
+            // Toggle menu on hamburger click
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isExpanded = headerNav.classList.toggle('active');
+                    mobileToggle.classList.toggle('active');
+                    mobileToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+                });
+            }
+            
+            // Close menu when any nav link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    headerNav.classList.remove('active');
+                    mobileToggle.classList.remove('active');
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                const isClickInsideMenu = headerNav.contains(e.target);
+                const isClickOnToggle = mobileToggle.contains(e.target);
+                
+                if (!isClickInsideMenu && !isClickOnToggle && headerNav.classList.contains('active')) {
+                    headerNav.classList.remove('active');
+                    mobileToggle.classList.remove('active');
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+            
+            // Close menu on window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    headerNav.classList.remove('active');
+                    mobileToggle.classList.remove('active');
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        // Special handling for home button - scroll to top
+                        if (targetId === 'home') {
+                            window.scrollTo({
+                                top: 0,
+                                behavior: 'smooth'
+                            });
+                        } else {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+ 
+<body>
+    <div id="container">
+        
+        <!-- Header -->
+        <header id="home" class="header-slim">
+            <div class="header-wrapper">
+                <div class="logo">
+                    <a href="#hero">Sito Articoli</a>
+                </div>
+                <button class="mobile-toggle" aria-label="Apri menu principale" aria-expanded="false" aria-controls="nav">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav id="nav" class="header-nav">
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#hero">Articoli</a></li>
+                        <li><a href="#content">Letture</a></li>
+                        <li><a href="#footer">Contatti</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        
+        <!-- Hero / Hook Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-container">
+                <div class="hero-text">
+                    <h1>TITOLO HOOK</h1>
+                    <p>Testo esplicativo del tema principale. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <a href="#content" class="btn btn-primary">Scopri di più</a>
+                </div>
+                <div class="hero-image">
+                    <img src="assets/times-square.jpg" alt="Featured image for hero section">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Full Width Image Section -->
+        <div class="fullwidth-image">
+            <img src="assets/times-square-people.jpg" alt="Full width featured image">
+            <div class="accent-circle-large"></div>
+        </div>
+        
+        <!-- Content Sections - Alternating Layout -->
+        <div id="content" class="content-grid">
+            
+            <!-- Content Block 1 - Text Left, Image Right -->
+            <article class="content-block content-left-text">
+                <div class="block-text">
+                    <h2>Primo Articolo</h2>
+                    <p>Testo dell'articolo. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <a href="#" class="btn btn-secondary btn-small">Leggi</a>
+                </div>
+                <div class="block-image">
+                    <img src="assets/times-square.jpg" alt="Article image">
+                </div>
+            </article>
+            
+            <!-- Content Block 2 - Image Left, Text Right -->
+            <article class="content-block content-right-text">
+                <div class="block-image">
+                    <img src="assets/times-square-traffic.jpg" alt="Article image">
+                </div>
+                <div class="block-text">
+                    <h2>Secondo Articolo</h2>
+                    <p>Testo dell'articolo. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <a href="#" class="btn btn-secondary btn-small">Leggi</a>
+                </div>
+            </article>
+            
+            <!-- Content Block 3 - Text Left, Image Right -->
+            <article class="content-block content-left-text">
+                <div class="block-text">
+                    <h2>Terzo Articolo</h2>
+                    <p>Testo dell'articolo. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <a href="#" class="btn btn-secondary btn-small">Leggi</a>
+                </div>
+                <div class="block-image">
+                    <img src="assets/times-square-horse.jpg" alt="Article image">
+                </div>
+            </article>
+            
+        </div>
+        
+        <!-- Footer -->
+        <footer id="footer" class="footer-main">
+            <div class="footer-content">
+                <p>&copy; 2025 Sito Articoli. Tutti i diritti riservati.</p>
+            </div>
+        </footer>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,727 @@
+/* =============================================================================
+   PROGETTO NOVA — ARCHITETTURA STILISTICA CSS
+   =============================================================================
+   Questo foglio di stile implementa la modernizzazione visiva dell'esercizio.
+   
+   CARATTERISTICHE E SCELTE DI SVILUPPO:
+   1. Vanilla CSS Moderno: Utilizzo di variabili CSS per coerenza cromatica,
+      evitando framework esterni pesanti in linea con un codice pulito e leggero.
+   2. Layout Fluido e Responsive:
+      - CSS Grid per la griglia dell'Hero e l'impaginazione responsive.
+      - Flexbox per allineamenti interni, navbar ed elementi del footer.
+      - Media Queries per un adattamento completo su dispositivi Tablet e Mobile.
+   3. Focus Visibile per Accessibilità:
+      - Implementazione di :focus-visible per fornire un contorno blu neon nitido
+        durante la navigazione con tastiera, ignorandolo durante i clic del mouse.
+   4. Riorganizzazione percorsi:
+      - Semplificazione dei percorsi (assets/ per le immagini e foglio di stile
+        posto nella stessa directory di index.html).
+   ============================================================================= */
+
+/* =============================================================================
+   GLOBAL STYLES - Minimalist Article Page Design
+   ============================================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: #ffffff;
+    color: #2c3e50;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+a {
+    color: #0066cc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0052a3;
+}
+
+/* Accessibility focus styles */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible {
+    outline: 3px solid #0066cc;
+    outline-offset: 3px;
+}
+
+
+/* =============================================================================
+   TYPOGRAPHY
+   ============================================================================= */
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+p {
+    margin-bottom: 1.5rem;
+    color: #555;
+    line-height: 1.8;
+}
+
+/* =============================================================================
+   BUTTONS & LINKS
+   ============================================================================= */
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #0066cc;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn:hover {
+    background-color: #0052a3;
+    color: #ffffff;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 102, 204, 0.2);
+}
+
+.btn-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+}
+
+.btn-primary {
+    background-color: #0066cc;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #0052a3;
+}
+
+.btn-secondary {
+    background-color: #333;
+    color: #ffffff;
+}
+
+.btn-secondary:hover {
+    background-color: #0066cc;
+    color: #ffffff;
+}
+
+.btn-light {
+    background-color: #ffffff;
+    color: #0066cc;
+    border: 2px solid #0066cc;
+}
+
+.btn-light:hover {
+    background-color: #f0f0f0;
+    color: #0066cc;
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
+}
+
+/* =============================================================================
+   CONTAINER
+   ============================================================================= */
+
+#container {
+    max-width: 100%;
+    margin: 0 auto;
+    background: #ffffff;
+}
+
+/* =============================================================================
+   HEADER - SLIM NAVIGATION
+   ============================================================================= */
+
+header.header-slim {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 1.5rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.logo a {
+    color: #1a1a1a;
+    text-decoration: none;
+}
+
+.logo a:hover {
+    color: #0066cc;
+}
+
+button.mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    padding: 8px 4px;
+    background: none;
+    border: none;
+}
+
+button.mobile-toggle span {
+    width: 25px;
+    height: 3px;
+    background: #1a1a1a;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+    display: block;
+}
+
+/* Hamburger animation when active */
+button.mobile-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translateY(11px);
+}
+
+button.mobile-toggle.active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+button.mobile-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-11px);
+}
+
+.header-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 3rem;
+    margin: 0;
+}
+
+.header-nav a {
+    color: #555;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    transition: color 0.3s ease;
+}
+
+.header-nav a:hover {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+/* =============================================================================
+   HERO SECTION
+   ============================================================================= */
+
+section.hero-section {
+    padding: 4rem 2rem;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.hero-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-text h1 {
+    margin-bottom: 1.5rem;
+}
+
+.hero-text p {
+    font-size: 1.05rem;
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.9;
+}
+
+.hero-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    min-height: 400px;
+    object-fit: cover;
+}
+
+.accent-circle {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    bottom: 20px;
+    right: 20px;
+    opacity: 0.8;
+}
+
+.accent-circle-large {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    opacity: 0.6;
+    bottom: 40px;
+    right: 40px;
+    pointer-events: none;
+}
+
+/* =============================================================================
+   FULLWIDTH IMAGE SECTION
+   ============================================================================= */
+
+.fullwidth-image {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+.fullwidth-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* =============================================================================
+   CONTENT GRID - ALTERNATING BLOCKS
+   ============================================================================= */
+
+#content.content-grid {
+    padding: 4rem 2rem;
+    background: #ffffff;
+}
+
+.content-block {
+    max-width: 1400px;
+    margin: 0 auto 5rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    justify-content: space-between;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.content-block:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+}
+
+.content-block:nth-child(even) {
+    background: #fafafa;
+}
+
+.content-block:nth-child(odd) {
+    background: #ffffff;
+}
+
+.content-block:last-child {
+    margin-bottom: 0;
+}
+
+.content-left-text .block-image,
+.content-left-text .block-text,
+.content-right-text .block-image,
+.content-right-text .block-text {
+    flex: 1 1 50%;
+    min-width: 0;
+}
+
+.content-right-text .block-image {
+    order: 1;
+}
+
+.content-right-text .block-text {
+    order: 2;
+}
+
+.content-left-text .block-text {
+    order: 1;
+}
+
+.content-left-text .block-image {
+    order: 2;
+}
+
+.block-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.block-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.block-text h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.block-text p {
+    color: #666;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin-bottom: 2rem;
+}
+
+.block-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.block-image img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+}
+
+.block-image .accent-circle {
+    width: 100px;
+    height: 100px;
+}
+
+/* =============================================================================
+   FOOTER
+   ============================================================================= */
+
+footer.footer-main {
+    background: #1a1a1a;
+    color: #ffffff;
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid #333;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+footer p {
+    color: #ffffff;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* =============================================================================
+   RESPONSIVE DESIGN - TABLET
+   ============================================================================= */
+
+@media (max-width: 1024px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    section.hero-section {
+        padding: 3rem 1.5rem;
+    }
+
+    .hero-container {
+        gap: 2rem;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-image img {
+        min-height: 300px;
+    }
+
+    .content-block {
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .block-image img {
+        height: 300px;
+    }
+
+    .fullwidth-image {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Header */
+    header.header-slim {
+        padding: 1rem 1.5rem;
+    }
+
+    .header-wrapper {
+        flex-wrap: wrap;
+    }
+
+    button.mobile-toggle {
+        display: flex;
+    }
+
+    .header-nav {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #ffffff;
+        border-bottom: 1px solid #e5e5e5;
+        padding: 1rem 0;
+        display: none;
+        flex-direction: column;
+        z-index: 999;
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .header-nav.active {
+        display: flex;
+    }
+
+    .header-nav ul {
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+        margin: 0;
+    }
+
+    .header-nav li {
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .header-nav a {
+        display: block;
+        padding: 1rem 1.5rem;
+        color: #555;
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-transform: capitalize;
+        transition: all 0.3s ease;
+        border-left: 3px solid transparent;
+    }
+
+    .header-nav a:hover {
+        color: #0066cc;
+        background-color: #f8f8f8;
+        border-left-color: #0066cc;
+        padding-left: 2rem;
+        text-decoration: none;
+    }
+
+    /* Hero Section */
+    section.hero-section {
+        padding: 2rem 1.5rem;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .hero-image img {
+        min-height: 300px;
+    }
+
+    /* Content Blocks */
+    .content-block {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+        padding: 1.5rem;
+    }
+
+    .content-block .block-image,
+    .content-block .block-text {
+        width: 100%;
+        order: unset !important;
+    }
+
+    .content-right-text .block-image,
+    .content-left-text .block-image,
+    .content-right-text .block-text,
+    .content-left-text .block-text {
+        order: unset !important;
+    }
+
+    .block-image img {
+        min-height: 180px;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+    }
+
+    .accent-circle,
+    .accent-circle-large {
+        display: none;
+    }
+
+    .block-image img {
+        height: 250px;
+    }
+
+    /* Full Width Image */
+    .fullwidth-image {
+        height: 250px;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 0.65rem 1.2rem;
+        font-size: 0.85rem;
+    }
+
+    .accent-circle {
+        width: 60px;
+        height: 60px;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .accent-circle-large {
+        width: 80px;
+        height: 80px;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    /* Header */
+    header.header-slim {
+        padding: 1rem;
+    }
+
+    .logo {
+        font-size: 1.25rem;
+    }
+
+    /* Hero */
+    section.hero-section {
+        padding: 1.5rem 1rem;
+    }
+
+    .hero-text p {
+        font-size: 0.95rem;
+    }
+
+    /* Content */
+    #content.content-grid {
+        padding: 2rem 1rem;
+    }
+
+    .content-block {
+        margin-bottom: 2.5rem;
+    }
+
+    .block-image img {
+        height: 200px;
+    }
+
+    .fullwidth-image {
+        height: 200px;
+    }
+
+    .accent-circle {
+        width: 50px;
+        height: 50px;
+    }
+}
